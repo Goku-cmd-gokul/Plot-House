@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* PlotHouse Dark Cinematic Theme */
+    --background: 240 10% 4%;
+    --foreground: 40 20% 95%;
+
+    --card: 240 10% 7%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 240 10% 7%;
+    --popover-foreground: 40 20% 95%;
+
+    /* Gold/Amber Primary */
+    --primary: 38 92% 50%;
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 40 20% 85%;
+
+    --muted: 240 10% 15%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 240 10% 4%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 40 20% 95%;
+
+    --border: 240 10% 15%;
+    --input: 240 10% 15%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom PlotHouse Variables */
+    --gold: 38 92% 50%;
+    --gold-light: 40 90% 60%;
+    --gold-dark: 35 90% 40%;
+    --cinema-black: 240 10% 4%;
+    --cinema-gray: 240 10% 8%;
+    --cinema-light: 240 10% 12%;
+    --warm-white: 40 20% 95%;
+    --cool-gray: 240 5% 55%;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(38 92% 50%), hsl(45 95% 60%));
+    --gradient-dark: linear-gradient(180deg, hsl(240 10% 6%), hsl(240 10% 3%));
+    --gradient-card: linear-gradient(145deg, hsl(240 10% 10%), hsl(240 10% 6%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(38 92% 50% / 0.15), transparent 60%);
+
+    /* Glass Effect */
+    --glass-bg: hsl(240 10% 8% / 0.7);
+    --glass-border: hsl(40 20% 95% / 0.1);
+
+    /* Shadows */
+    --shadow-glow: 0 0 60px hsl(38 92% 50% / 0.15);
+    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
+    --shadow-elevated: 0 20px 60px hsl(0 0% 0% / 0.5);
+
+    /* Sidebar */
+    --sidebar-background: 240 10% 6%;
+    --sidebar-foreground: 40 20% 85%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 240 10% 4%;
+    --sidebar-accent: 240 10% 12%;
+    --sidebar-accent-foreground: 40 20% 95%;
+    --sidebar-border: 240 10% 15%;
+    --sidebar-ring: 38 92% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  /* Glass Card Effect */
+  .glass-card {
+    @apply backdrop-blur-xl border;
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+  }
+
+  /* Gold Text Gradient */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  /* Glow Effect */
+  .glow-gold {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Content Card Hover */
+  .content-card {
+    @apply relative overflow-hidden rounded-xl transition-all duration-500;
+  }
+
+  .content-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(180deg, transparent 40%, hsl(38 92% 50% / 0.2) 100%);
+  }
+
+  .content-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .content-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-elevated), var(--shadow-glow);
+  }
+
+  /* Animated Underline */
+  .animated-underline {
+    @apply relative;
+  }
+
+  .animated-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300;
+    background: var(--gradient-gold);
+  }
+
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Cinema Button */
+  .btn-cinema {
+    @apply relative overflow-hidden rounded-lg px-6 py-3 font-semibold transition-all duration-300;
+    background: var(--gradient-gold);
+    color: hsl(var(--primary-foreground));
+  }
+
+  .btn-cinema::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(45 95% 65%), hsl(38 92% 55%));
+  }
+
+  .btn-cinema:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-cinema:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px hsl(38 92% 50% / 0.3);
+  }
+
+  /* Ghost Button */
+  .btn-ghost-gold {
+    @apply border border-primary/50 bg-transparent text-primary transition-all duration-300;
+  }
+
+  .btn-ghost-gold:hover {
+    @apply border-primary bg-primary/10;
+  }
+
+  /* Mood Chip */
+  .mood-chip {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300;
+    background: hsl(var(--secondary));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .mood-chip:hover {
+    @apply border-primary/50;
+    background: hsl(var(--primary) / 0.1);
+  }
+
+  .mood-chip.active {
+    @apply border-primary;
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--primary));
+  }
+
+  /* Progress Bar */
+  .progress-gold {
+    @apply h-2 rounded-full overflow-hidden;
+    background: hsl(var(--muted));
+  }
+
+  .progress-gold-fill {
+    @apply h-full rounded-full transition-all duration-500;
+    background: var(--gradient-gold);
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  /* Fade In Animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  /* Pulse Glow */
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(38 92% 50% / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(38 92% 50% / 0.5);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Float Animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
